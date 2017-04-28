@@ -1,5 +1,5 @@
 (defmacro def-class (class &rest values)
-	`(progn (defun ,class (&key ,@values)
+	`(progn (defun ,(intern(string-upcase (concatenate 'string  "make-" (string class) ))) (&key ,@values)
 				(vector ,@values)
 			)
 			
