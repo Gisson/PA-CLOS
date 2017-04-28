@@ -10,4 +10,5 @@
 					)		
 			)	
 			
-		; (def-class lol a) (setf as (LOL :A 1)) (LOL-A as)
+	)	
+)
