@@ -3,6 +3,10 @@
 				(vector ,@values)
 			)
 			
+			(defun ,(intern(string-upcase (concatenate 'string  (string class) "?" ))) (class)
+				(and (simple-vector-p class) (equal ,(length (vector values)) (length class) ) )
+			)
+			
 		
 			,@(dolist (val values)
 				`(defun ,(intern(string-upcase (concatenate 'string (string class) "-" (string val) )))()
