@@ -90,3 +90,6 @@ compiled
 
 # End of https://www.gitignore.io/api/elisp,emacs,racket,commonlisp
 
+
+#targets folder
+target/
