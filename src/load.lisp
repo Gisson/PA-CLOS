@@ -1,12 +1,12 @@
 (defmacro def-class (class &rest values)
-	(let ((i -1))
+	(let ((i 0))
 	`(progn 
 		(defun ,(intern(string-upcase (concatenate 'string  "make-" (string class) ))) (&key ,@values)
-				(vector ,@values)
-			)
+				(vector (string ,class) ,@values)
+		)
 			
 		(defun ,(intern(string-upcase (concatenate 'string  (string class) "?" ))) (,class)
-				(and (simple-vector-p class) (equal ,(length (vector values)) (length ,class) ) )
+				(eql (string ,class) (aref ,class 0))
 			)
 			,@(mapcar 
 				#'(lambda (x) 
