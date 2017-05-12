@@ -1,3 +1,7 @@
+(defun cool-symbol (before extra &optional (after nil)) 
+             (intern(string-upcase (concatenate 'string  before (string extra) after )))
+             )
+
 (defmacro def-class (class &rest values)
 	(if (not (listp class))
 		(setf class (list class))
@@ -8,14 +12,14 @@
 	(heir (list name)))
 	
 	(dolist (super (cdr class))
-		(let ((current  (symbol-value (intern(string-upcase (concatenate 'string  "global-" (string super) ))))))
+		(let ((current  (symbol-value (cool-symbol "global-" super ))))
 			(setf heir (append heir current))
 		)
 	)
 	
 	`(progn 
-		(setf ,(intern(string-upcase (concatenate 'string  "global-" (string name) ))) ',heir)
-		(defun ,(intern(string-upcase (concatenate 'string  "make-" (string name) ))) (&key ,@values)
+		(setf ,(cool-symbol "global-" name) ',heir)
+		(defun ,(cool-symbol  "make-" name) (&key ,@values)
 			(let ((classval (vector ',class ,@values)))
 				; (dolist (i ,heir)
 					
@@ -24,7 +28,7 @@
 			)
 		)
 			
-		(defun ,(intern(string-upcase (concatenate 'string  (string name) "?" ))) (,name)
+		(defun ,(cool-symbol nil name "?" ) (,name)
 			(if (and (simple-vector-p ,name) (listp (aref ,name 0)) (find ,(string name) (mapcar #'string (aref ,name 0)) :test #'equal))
 					t
 				nil
@@ -35,7 +39,7 @@
 		,@(mapcar 
 			#'(lambda (x) 
 					(incf i)
-					`(defun ,(intern(string-upcase (concatenate 'string (string name) "-" (string x) ))) (,name)
+					`(defun ,(cool-symbol nil name (concatenate 'string "-" (string x) )) (,name)
 						(aref ,name ,i)
 					)
 			) values
