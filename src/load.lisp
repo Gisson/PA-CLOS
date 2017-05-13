@@ -1,3 +1,7 @@
+(defun cool-symbol (before extra &optional (after nil)) 
+             (intern(string-upcase (concatenate 'string  before (string extra) after )))
+             )
+
 (defmacro def-class (class &rest values)
 	(if (not (listp class))
 		(setf class (list class))
