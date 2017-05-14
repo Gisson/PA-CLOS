@@ -8,8 +8,10 @@ TESTFILE=tests
 
 all: test
 
-test: $(TARGETDIR)$(MAIN_FILENAME).fas
-	clisp $(FLAGS) -i $(TESTDIR)$(TESTFILE).lisp
+test: 
+	@echo -e "\033[31m"
+	clisp $(FLAGS) < $(TESTDIR)$(TESTFILE).lisp
+	@echo -e "\e[0m"
 	
 
 run: $(TARGETDIR)$(MAIN_FILENAME).fas 
