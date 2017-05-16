@@ -49,10 +49,23 @@
                 
             ,@(mapcar 
                 #'(lambda (x)
-                        (incf i)
                         `(defun ,(gen-symbol name "-" x) (,name)
                             (values (gethash ',x (aref ,name 1)))
                         )
+                ) values
+            )
+
+            ;creates a separate function setter
+            ,@(mapcar #'(lambda (x)
+                        `(defun ,(gen-symbol name "-set-" x) (,name newvalue)
+                            (setf (gethash ',x (aref ,name 1)) newvalue)
+                        )
+                ) values
+            )
+            ;uses defsetf ex:(defsetf getter-function setter-function)
+            ;for the   (setf (person-name person) "newname")   to work
+            ,@(mapcar #'(lambda (x)
+                        `(defsetf ,(gen-symbol name "-" x) ,(gen-symbol name "-set-" x))
                 ) values
             )
         )
