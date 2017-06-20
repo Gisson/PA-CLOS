@@ -2,7 +2,7 @@
 
 The objective of this project was to implement classes in lisp without using any of the current class system neither the structs.
 
-More is explain at the [project description](https://github.com/Gisson/PA2_CLOS/blob/master/description.pdf)
+More is explain at the [project description](https://github.com/Gisson/PA2_CLOS/blob/master/info/description.pdf)
 
 A very summarized explanation of our implementation can be found at the [presentation slides](https://github.com/Gisson/PA2_CLOS/blob/master/info/p2.pdf).
 
