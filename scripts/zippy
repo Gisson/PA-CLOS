@@ -1,7 +1,10 @@
 #!/bin/bash
 
 
-BASEDIR=$(pwd)
+BASEDIR="$(pwd)/.."
+INFO_DIR="info"
+PDF_FILE="p2.pdf"
+ZIPNAME="project.zip"
 #force=false
 
 #while getopts ":a:" opt; do
@@ -21,6 +24,7 @@ BASEDIR=$(pwd)
  # esac
 #done
 
+cd $BASEDIR
 make clean;make test
 	echo -e "Do you still wish to continue? (Press Ctrl+c to exit or Enter to continue):"
 	read
@@ -29,13 +33,15 @@ echo -e "\033[32mZipping....\e[0m"
 cd $(mktemp -d)
 cp -r $BASEDIR/src g08/
 
-if ! [[ -f $BASEDIR/p2.pdf ]];then
+if ! [[ -f $BASEDIR/$INFO_DIR/$PDF_FILE ]];then
 	echo -e "\033[31m[WARNING] No pdf file found. Zipping without slides!\e[0m Continue?"
 	read
+else
+	cp  $BASEDIR/$INFO_DIR/$PDF_FILE g08
 fi
 
-zip -r project.zip g08 2>/dev/null
+zip -r $ZIPNAME g08 2>/dev/null
 echo -e "\033[93mThe contents of the zip are:\n\e[0m $(unzip -l project.zip)\nContinue?"
 read
-mv project.zip $BASEDIR
+mv $ZIPNAME $BASEDIR
 echo "DONE!"
