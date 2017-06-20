@@ -11,7 +11,7 @@ A very summarized explanation of our implementation can be found at the [present
 In the folder scripts you can find a script that zips but first runs the program and tests it against a test battery handed to us by the teacher.
 
 To run it yourself there is a Makefile so you just need to do ```make run```. The default target is test.
-*Make sure you have clisp installed*
+**Make sure you have clisp installed**
 ## License
 
 This project is under [GPLv3 license](https://github.com/Gisson/PA2_CLOS/blob/master/LICENSE.md).
